@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="码农的世界">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="Java,注解" />
+
+
+<meta name="description" content="注解概念Java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 java.lang..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Java学习总结-注解 |
+    
+    码农的世界
+</title>
+
+<link rel="alternate" href="/atom.xml" title="码农的世界" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='YujieCute'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                读万卷书，行万里路
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        码农的世界</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                文章</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/随想/"><i class="fa "></i>
+                                思想录</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Java学习总结-注解">
+            
+            Java学习总结-注解
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Java/" rel="tag">Java</a> <a class="tag-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2017/11/20</span>
+    </span>
+    
+    <span class="fa-wrap">
+        <i class="fa fa-eye"></i>
+        <span id="busuanzi_value_page_pv"></span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                730</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="注解概念"><a href="#注解概念" class="headerlink" title="注解概念"></a>注解概念</h3><p>Java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。<br>注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 java.lang.annotation 包中。</p>
+<p>其中涉及到另外一个概念“元注解”，元注解是指注解的注解。包括以下五种 ：</p>
+<ol>
+<li>@Retention</li>
+<li>@Target</li>
+<li>@Document</li>
+<li>@Inherited</li>
+<li>@Repeatable </li>
+</ol>
+<h3 id="注解解释"><a href="#注解解释" class="headerlink" title="注解解释"></a>注解解释</h3><h4 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h4><p>当 @Retention 应用到一个注解上的时候，它解释说明了这个注解的的存活时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">RetentionPolicy.SOURCE </span><br><span class="line">注解只在源码阶段保留，在编译器进行编译时它将被丢弃忽视。</span><br><span class="line"></span><br><span class="line">RetentionPolicy.CLASS </span><br><span class="line">注解只被保留到编译进行的时候，它并不会被加载到 JVM 中。</span><br><span class="line"></span><br><span class="line">RetentionPolicy.RUNTIME </span><br><span class="line">注解可以保留到程序运行的时候，它会被加载进入到 JVM 中，所以在程序运行时可以获取到它们。</span><br><span class="line"></span><br><span class="line">@DOCUMENTED</span><br><span class="line">它的作用是能够将注解中的元素包含到 Javadoc 中去。</span><br></pre></td></tr></table></figure>
+
+<h4 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h4><p>@Target 指定了注解运用的地方。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">ElementType.ANNOTATION_TYPE </span><br><span class="line">可以给一个注解进行注解</span><br><span class="line"></span><br><span class="line">ElementType.CONSTRUCTOR </span><br><span class="line">可以给构造方法进行注解</span><br><span class="line"></span><br><span class="line">ElementType.FIELD </span><br><span class="line">可以给属性进行注解</span><br><span class="line"></span><br><span class="line">ElementType.LOCAL_VARIABLE </span><br><span class="line">可以给局部变量进行注解</span><br><span class="line"></span><br><span class="line">ElementType.METHOD </span><br><span class="line">可以给方法进行注解</span><br><span class="line"></span><br><span class="line">ElementType.PACKAGE </span><br><span class="line">可以给一个包进行注解</span><br><span class="line"></span><br><span class="line">ElementType.PARAMETER</span><br><span class="line">可以给一个方法内的参数进行注解</span><br><span class="line"> </span><br><span class="line">ElementType.TYPE </span><br><span class="line">可以给一个类型进行注解，比如类、接口、枚举</span><br><span class="line"></span><br><span class="line">@INHERITED</span><br><span class="line">如果一个超类被 @Inherited 注解过的注解进行注解的话，那么如果它的子类没有被任何注解应用的话，那么这个子类就继承了超类的注解。</span><br><span class="line"></span><br><span class="line">@REPEATABLE</span><br><span class="line">@Repeatable 是 Java 1.8 才加进来的，所以算是一个新的特性，其实只是语法糖而已。</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h4><p>注解通过 @interface 关键字进行定义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public @interface PersonAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="注解的属性"><a href="#注解的属性" class="headerlink" title="注解的属性"></a>注解的属性</h4><p>注解的属性也叫做成员变量。注解只有成员变量，没有方法。注解的成员变量在注解的定义中以“无形参的方法”形式来声明，其方法名定义了该成员变量的名字，其返回值定义了该成员变量的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface PersonAnnotation &#123;</span><br><span class="line">    int age();</span><br><span class="line">    String name();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码定义了 PersonAnnotation 这个注解中拥有 age 和 name 两个属性。在使用的时候，我们应该给它们进行赋值。赋值的方式是在注解的括号内以 value=”” 形式，多个属性之前用 ，隔开。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@PersonAnnotation(age=3,name=&quot;Xiaoming&quot;)</span><br><span class="line">public class People &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参数成员只能用基本类 byte,short,char,int,long,float,double,boolean 八种基本数据类型和 String、Enum、Class、annotations 等数据类型,以及这一些类型的数组.</p>
+<p>注解中属性可以有默认值，默认值需要用 default 关键值指定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface PersonAnnotation &#123;</span><br><span class="line">    int age() default 20;</span><br><span class="line">    String name() default &quot;Xiaoming&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>则可以直接使用，不需要进行复制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@PersonAnnotation</span><br><span class="line">public class People &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="注解获取"><a href="#注解获取" class="headerlink" title="注解获取"></a>注解获取</h4><p>要获取类方法和字段的注解信息，必须通过 Java 的反射技术来获取 Annotation 对象,因为你除此之外没有别的获取注解对象的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isAnnotationPresent()</span><br></pre></td></tr></table></figure>
+
+<p>通过 Class 对象的 isAnnotationPresent() 方法判断它是否应用了某个注解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getAnnotation()</span><br></pre></td></tr></table></figure>
+
+<p>通过 getAnnotation() 方法来获取 Annotation 对象。</p>
+<h4 id="属性值获取"><a href="#属性值获取" class="headerlink" title="属性值获取"></a>属性值获取</h4><p>通过以上两个注解方法就可以获取注解的值了，接下来我们通过一个自定义的实例来了解注解以上知识点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.annotation.*;</span><br><span class="line">@Documented</span><br><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface PersonAnnotaion &#123;</span><br><span class="line">    int age() default 20;</span><br><span class="line">    String name() default &quot;Xiaoming&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先定义一个 PersonAnnotaion 注解，接着写一个 Person 类进行使用该注解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@PersonAnnotaion(age = 22, name = &quot;LiLei&quot;)</span><br><span class="line">public class Person &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后写个测试类用于获取该注解的属性值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class PersonAnnataionTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        boolean hasAnnotation = Person.class.isAnnotationPresent(PersonAnnotaion.class);</span><br><span class="line">        if (hasAnnotation) &#123;</span><br><span class="line">            PersonAnnotaion testAnnotation = Person.class.getAnnotation(PersonAnnotaion.class);</span><br><span class="line">            System.out.println(&quot;age :&quot; + testAnnotation.age());</span><br><span class="line">            System.out.println(&quot;name :&quot; + testAnnotation.name());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>以上是类的注解，同样的，属性、方法都可以使用注解，最常见的就是 Java 提供了一些内置的注解。</p>
+<p>@Deprecated<br>这个元素是用来标记过时的元素，编译器在编译阶段遇到这个注解时会发出提醒警告，告诉开发者正在调用一个过时的元素比如过时的方法、过时的类、过时的成员变量。</p>
+<p>@Override<br>提示子类要复写父类中被 @Override 修饰的方法</p>
+<p>@SuppressWarnings<br>阻止警告的意思。之前说过调用被 @Deprecated 注解的方法后，编译器会警告提醒，而有时候开发者会忽略这种警告，他们可以在调用的地方通过 @SuppressWarnings 达到目的。</p>
+<h4 id="自定义注解类规则"><a href="#自定义注解类规则" class="headerlink" title="自定义注解类规则"></a>自定义注解类规则</h4><p>Annotation型定义为@interface, 所有的Annotation会自动继承java.lang.Annotation这一接口,并且不能再去继承别的类或是接口.参数成员只能用public或默认(default)这两个访问权修饰参数成员只能用基本类型byte,short,char,int,long,float,double,boolean八种基本数据类型和String、Enum、Class、annotations等数据类型,以及这一些类型的数组.要获取类方法和字段的注解信息，必须通过Java的反射技术来获取 Annotation对象,因为你除此之外没有别的获取注解对象的方法注解也可以没有定义成员, 不过这样注解就没啥用了</p>
+
+    </div>
+    <div class="wechat">
+        
+            <hr />
+            <p> 欢迎关注微信公众号 </p>
+            <img src="/img/wechat-qcode.png" />
+        
+        </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="https://github.com/crazyandcoder" target="_blank">YujieCute</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2018/06/20/2018%E5%B9%B46%E6%9C%88%E4%B8%8A%E6%B5%B7%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%8E%86/" class="pre-post btn btn-default" title='2018年6月上海面试经历'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            2018年6月上海面试经历</span>
+    </a>
+    
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#注解概念"><span class="toc-text">注解概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注解解释"><span class="toc-text">注解解释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Retention"><span class="toc-text">@Retention</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Target"><span class="toc-text">@Target</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义注解"><span class="toc-text">自定义注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注解的属性"><span class="toc-text">注解的属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注解获取"><span class="toc-text">注解获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性值获取"><span class="toc-text">属性值获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义注解类规则"><span class="toc-text">自定义注解类规则</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+    访问量:
+    <strong id="busuanzi_value_site_pv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    &nbsp; | &nbsp;
+    访客数:
+    <strong id="busuanzi_value_site_uv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>
