@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="码农的世界">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="源码编译" />
+
+
+<meta name="description" content="前言搞Android的人不编译一下Android的源码感觉人生好像不大完整似的。早就想编译Android源码，但是前前后后经历好长时间都没有把它搞出来，就这样拖着，直到昨天晚上才真正的把Andr..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Android编译8.0源码 |
+    
+    码农的世界
+</title>
+
+<link rel="alternate" href="/atom.xml" title="码农的世界" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='YujieCute'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                读万卷书，行万里路
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        码农的世界</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                文章</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/杂谈/"><i class="fa "></i>
+                                杂谈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                关于</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android编译8.0源码">
+            
+            Android编译8.0源码
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/" rel="tag">源码编译</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2018/11/23</span>
+    </span>
+    
+    <span class="fa-wrap">
+        <i class="fa fa-eye"></i>
+        <span id="busuanzi_value_page_pv"></span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                371</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>搞Android的人不编译一下Android的源码感觉人生好像不大完整似的。早就想编译Android源码，但是前前后后经历好长时间都没有把它搞出来，就这样拖着，直到昨天晚上才真正的把Android8.0源码给编译出来。一开始在Mac下面编译的，但是环境搭建配置非常麻烦，而且问题特别多，编译到最后一步时出现问题，Google了好几天都没有解决，最后转战Ubuntu，一次性编译成功。来欣赏一下编译成果！</p>
+<p><img src="https://img-blog.csdnimg.cn/20191129140101214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xqMTg4MjY2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="编译环境"><a href="#编译环境" class="headerlink" title="编译环境"></a>编译环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、Ubuntu16.04</span><br><span class="line">2、Android8.0源码</span><br></pre></td></tr></table></figure>
+
+<p>对于Ubuntu16.04系统，有的人认为虚拟机里面安装也可以，我没有试过，因为电脑配置不够，我怕跑不起来，所以直接用了公司的Windows7台式机安装了Ubuntu、windows双系统，所以建议还是在原生的Ubuntu系统里面进行编译，防止出现各种诡异的问题。</p>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu16.04系统安装</span><br></pre></td></tr></table></figure>
+
+<p>对于Ubuntu16.04系统，我是是通过u盘来安装的，方便快捷，这里就不说怎么安装系统了，不会的话建议百度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Android8.0源码下载</span><br></pre></td></tr></table></figure>
+
+
+<p>Android8.0源码的下载就比较蛋疼了，因为我们只有通过VPN才能访问Google的一些东西，对于源码这东西，动不动几十个G的话，通过VPN来下载的话，肯定懵逼啊，所以我们得另辟途径。<a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" target="_blank" rel="noopener">清华大学开源软件镜像站</a>，这个站点就提供Google的Android源码下载，最好使用里面的<a href="https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar" target="_blank" rel="noopener">每月更新的初始化包</a>来下载，我是通过迅雷下载的，初始化包大概有42G，用迅雷，我这边大概花了3个小时就下载好了。这里说个题外话。我一开始是在Ubuntu里面的Firefox直接下载源码，大概试了三四次，都没有成功，也不知道为什么，前两次都是下载到20G左右的时候，就停了，不再继续下载，第三次下载到40G左右时停掉了，莫名其妙，也不能断点下载，所以换了个方式，直接在Mac里面迅雷下载好了，再传到Ubuntu中，太耗时间了！！！</p>
+<p>下载好了初始化包，我们把它放到一个文件夹下面，随便建一个目录即可，然后解压，解压下来你会发现里面什么都没有，是个空的，又是一个大大的懵逼！！！，其实里面存在一个隐藏的文件.repo，我们通过这个文件在sync一下就可以了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191129140220285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xqMTg4MjY2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="下载-repo-工具"><a href="#下载-repo-工具" class="headerlink" title="下载 repo 工具"></a>下载 repo 工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/bin</span><br><span class="line">PATH=~/bin:$PATH</span><br><span class="line">curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</span><br><span class="line">chmod a+x ~/bin/repo</span><br></pre></td></tr></table></figure>
+
+<p>可能有些某种原因，所以自备梯子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar # 下载初始化包</span><br><span class="line">tar xf aosp-latest.tar</span><br><span class="line">cd AOSP   # 解压得到的 AOSP 工程目录</span><br></pre></td></tr></table></figure>
+<p>这时 ls 的话什么也看不到，因为只有一个隐藏的 .repo 目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">repo sync # 正常同步一遍即可得到完整目录</span><br><span class="line">或 repo sync -l 仅checkout代码</span><br></pre></td></tr></table></figure>
+
+
+<p>这是清华大学开源软件镜像站提供的方法，按照这个做，没错，只不过耗时而已，看个人的网速。当然了也可以下载指定的Android版本源码，具体方法，请查看介绍： Android 镜像使用帮助</p>
+<p>首先我们需要安装一些依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y git flex bison gperf build-essential libncurses5-dev:i386 </span><br><span class="line">sudo apt-get install libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-dev g++-multilib </span><br><span class="line">sudo apt-get install tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386 </span><br><span class="line">sudo apt-get install dpkg-dev libsdl1.2-dev libesd0-dev</span><br><span class="line">sudo apt-get install git-core gnupg flex bison gperf build-essential  </span><br><span class="line">sudo apt-get install zip curl zlib1g-dev gcc-multilib g++-multilib </span><br><span class="line">sudo apt-get install libc6-dev-i386 </span><br><span class="line">sudo apt-get install lib32ncurses5-dev x11proto-core-dev libx11-dev </span><br><span class="line">sudo apt-get install lib32z-dev ccache</span><br><span class="line">sudo apt-get install libgl1-mesa-dev libxml2-utils xsltproc unzip m4</span><br></pre></td></tr></table></figure>
+
+<p>设置编译器高速缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prebuilts/misc/linux-x86/ccache/ccache -M 50G</span><br></pre></td></tr></table></figure>
+
+<p>安装openJDK8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openjdk-8-jdk</span><br></pre></td></tr></table></figure>
+
+<p>接着导入编译Android源码所需的环境变量和其它参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source build/envsetup.sh</span><br></pre></td></tr></table></figure>
+
+<p>使用 lunch 选择要编译的目标。确切的配置可作为参数进行传递</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lunch aosp_arm-eng</span><br></pre></td></tr></table></figure>
+
+<p>编译代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j4</span><br></pre></td></tr></table></figure>
+
+<p>通过以上几步，我们就可以耐心的等待编译了，我这边是下班的时候开始编译的，等到第二天早上过来的时候，就提示已经编译成功，我也没想到一次性编译通过，毕竟在Mac上面编译了一个多月，基本都是在1%的时候就会报错，然后就一直Google，奈何一直找不到解决方法，就换成Ubuntu了，没想到一次性编译通过。</p>
+<p>我们编译Android源码的主要目的还是查看分析Android源码，所以接下来我们得生成AndroidStudio查看源码的格式。</p>
+<p>以上若已经编译成功的话，我们进入到Android源码的路径下面，首先我们需要生成AndroidStudio所需要的格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mmm development/tools/idegen/</span><br></pre></td></tr></table></figure>
+
+<p>执行成功之后再次执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./development/tools/idegen/idegen.sh</span><br></pre></td></tr></table></figure>
+
+<p>通过以上两条命令的话，就可以生产AS 所需要的文件了android.ipr，进入Android源码根目录，打开AndroidStudio，导入这个文件即可，初次导入，时间比较久。</p>
+<p>以上便是大概的过程，我大概经历了一个多月的时间才真正的编译成功，这期间放弃、继续、放弃、继续，来回挣扎，所以如果真想编译Android源码的话，建议，耐心一点，出现问题，找Google，换种思路继续，坚持到最后应该就可以了编出来了。</p>
+
+    </div>
+    <div class="wechat">
+        
+            <hr />
+            <p> 欢迎关注微信公众号 </p>
+            <img src="/img/wechat-qcode.png" />
+        
+        </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="https://github.com/crazyandcoder" target="_blank">YujieCute</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2019/11/26/Android%E4%B8%AD%E5%85%B3%E4%BA%8EContext%E7%9A%84%E4%B8%89%E8%A8%80%E4%B8%A4%E8%AF%AD/" class="pre-post btn btn-default" title='Android中关于Context的三言两语'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Android中关于Context的三言两语</span>
+    </a>
+    
+    
+    <a href="/2018/06/20/2018%E5%B9%B46%E6%9C%88%E4%B8%8A%E6%B5%B7%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%8E%86/" class="next-post btn btn-default" title='2018年6月上海面试经历'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            2018年6月上海面试经历</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译环境"><span class="toc-text">编译环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境"><span class="toc-text">配置环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载-repo-工具"><span class="toc-text">下载 repo 工具</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+    访问量:
+    <strong id="busuanzi_value_site_pv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    &nbsp; | &nbsp;
+    访客数:
+    <strong id="busuanzi_value_site_uv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>
