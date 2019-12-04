@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="码农的世界">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="Android,存储目录" />
+
+
+<meta name="description" content="前言前两天因为开发一个app更新的功能，我将从服务器下载的apk文件放在了内部存储目录（测试手机为小米，路径为：data/user/0/packagename/files）下面，然后安装的时候一..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Android中存储目录详解 |
+    
+    码农的世界
+</title>
+
+<link rel="alternate" href="/atom.xml" title="码农的世界" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='YujieCute'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                读万卷书，行万里路
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        码农的世界</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                文章</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/杂谈/"><i class="fa "></i>
+                                杂谈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                关于</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android中存储目录详解">
+            
+            Android中存储目录详解
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Android/" rel="tag">Android</a> <a class="tag-link" href="/tags/%E5%AD%98%E5%82%A8%E7%9B%AE%E5%BD%95/" rel="tag">存储目录</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2019/12/04</span>
+    </span>
+    
+    <span class="fa-wrap">
+        <i class="fa fa-eye"></i>
+        <span id="busuanzi_value_page_pv"></span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前两天因为开发一个app更新的功能，我将从服务器下载的apk文件放在了内部存储目录（测试手机为小米，路径为：data/user/0/packagename/files）下面，然后安装的时候一直安装不了，提示解析包出错。后来查询发现，安装apk是调用了PackageInstaller，没有相关权限，这个无法获取内部路径，所以会安装不了。借机也复习了一遍Android下面存储相关的知识点，特来总结一番。</p>
+<h2 id="存储分类"><a href="#存储分类" class="headerlink" title="存储分类"></a>存储分类</h2><p><img src="https://img-blog.csdnimg.cn/20191204141946706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xqMTg4MjY2,size_16,color_FFFFFF,t_70" alt=""><br>对于Android存储目录，我总结成一张思维导图，如果有需要原图的，请在我的<strong>公众号后台</strong>回复<strong>“存储目录”</strong>即可获取原图。上面这张图很清楚的展示了Android存储的目录，接下来我们详细分析每一个目录。</p>
+<h3 id="内部存储"><a href="#内部存储" class="headerlink" title="内部存储"></a>内部存储</h3><p>内部存储位于系统中很特殊的一个位置，对于设备中每一个安装的 App，系统都会在 <strong>data/data/packagename/xxx</strong> 自动创建与之对应的文件夹。如果你想将文件存储于内部存储中，那么文件默认只能被你的应用访问到，且一个应用所创建的所有文件都在和应用包名相同的目录下。也就是说应用创建于内部存储的文件，与这个应用是关联起来的。当一个应用卸载之后，内部存储中的这些文件也被删除。对于这个内部目录，用户是无法访问的，除非获取root权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String fileDir = this.getFilesDir().getAbsolutePath();</span><br><span class="line">String cacheDir = this.getCacheDir().getAbsolutePath();</span><br></pre></td></tr></table></figure>
+<p>一般情况下，我们获取到的路径为<strong>data/data/packagename/xxx</strong>，小米手机下面打印出来的结果如下：<br><img src="https://img-blog.csdnimg.cn/20191204145737427.png" alt=""></p>
+<p>对于内部存储路径，我们一般通过以下两种方式获取，内部存储空间的获取都需要使用Context：</p>
+<h5 id="context-getFileDir"><a href="#context-getFileDir" class="headerlink" title="context.getFileDir()"></a>context.getFileDir()</h5><p>对应内部存储的路径为: <strong>data/data/packagename/files</strong>，但是对于有的手机如：华为，小米等获取到的路径为：<strong>data/user/0/packagename/files</strong></p>
+<h5 id="context-getCacheDir"><a href="#context-getCacheDir" class="headerlink" title="context.getCacheDir()"></a>context.getCacheDir()</h5><p>对应内部存储的路径为: <strong>data/data/packagename/cache</strong>，但是对于有的手机如：华为，小米等获取到的路径为：<strong>data/user/0/packagename/cache</strong>应用程序的缓存目录，该目录内的文件在设备内存不足时会优先被删除掉，所以存放在这里的文件是没有任何保障的，可能会随时丢掉。</p>
+<h3 id="外部存储"><a href="#外部存储" class="headerlink" title="外部存储"></a>外部存储</h3><p>针对于外部存储比较容易混淆，因为在Android4.4以前，手机机身存储就叫内部存储，插入的SD卡就是外部存储，但是在Android4.4以后的话，就目前而言，现在的手机自带的存储就很大，现在Android10.0的话，有的手机能达到256G的存储，针对于这种情况，手机机身自带的存储也是外部存储，如果再插入SD卡的话也叫外部存储，因此对于外部存储分为两部分：SD卡和扩展卡内存</p>
+<p>我们通过一段代码来获取手机的外部存储目录，我们用的测试手机是三星G4，带有插入SD卡的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">            File[] files = getExternalFilesDirs(Environment.MEDIA_MOUNTED);</span><br><span class="line">            for (File file : files) &#123;</span><br><span class="line">                Log.e(&quot;file_dir&quot;, file.getAbsolutePath());</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于以上代码，打印的结果如下：<br><img src="https://img-blog.csdnimg.cn/20191204153641809.png" alt=""><br>打印出两行目录，第一行目录是机身自带的外部存储目录，目录结构为：/storage/emulated/0/Android/data/packagename/files<br>第二行是存储卡的目录结构，路径为：/storage/extSdCard/Android/data/packagename/files</p>
+<h4 id="扩展外部存储"><a href="#扩展外部存储" class="headerlink" title="扩展外部存储"></a>扩展外部存储</h4><p>此目录路径需要通过context来获取，同时在app卸载之后，这些文件也会被删除。类似于内部存储。</p>
+<h5 id="getExternalCacheDir"><a href="#getExternalCacheDir" class="headerlink" title="getExternalCacheDir()"></a>getExternalCacheDir()</h5><p>对应外部存储路径:/storage/emulated/0/Android/data/packagename/cache</p>
+<h5 id="getExternalFilesDir-String-type"><a href="#getExternalFilesDir-String-type" class="headerlink" title="getExternalFilesDir(String type)"></a>getExternalFilesDir(String type)</h5><p>对应外部存储路径:/storage/emulated/0/Android/data/packagename/files</p>
+<h4 id="SD卡存储"><a href="#SD卡存储" class="headerlink" title="SD卡存储"></a>SD卡存储</h4><p>SD卡里面的文件是可以被自由访问，即文件的数据对其他应用或者用户来说都是可以访问的，当应用被卸载之后，其卸载前创建的文件仍然保留。</p>
+<p>对于SD卡上面的文件路径需要通过Environment获取，同时在获取前需要判断SD的状态：</p>
+<blockquote>
+<p>MEDIA_UNKNOWN   SD卡未知<br>MEDIA_REMOVED    SD卡移除<br>MEDIA_UNMOUNTED  SD卡未安装<br>MEDIA_CHECKING   SD卡检查中，刚装上SD卡时<br>MEDIA_NOFS            SD卡为空白或正在使用不受支持的文件系统<br>MEDIA_MOUNTED   SD卡安装<br>MEDIA_MOUNTED_READ_ONLY  SD卡安装但是只读<br>MEDIA_SHARED   SD卡共享<br>MEDIA_BAD_REMOVAL  SD卡移除错误<br>MEDIA_UNMOUNTABLE  存在SD卡但是不能挂载，例如发生在介质损坏</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String externalStorageState = Environment.getExternalStorageState();</span><br><span class="line">if (externalStorageState.equals(Environment.MEDIA_MOUNTED))&#123;</span><br><span class="line">           //sd卡已经安装，可以进行相关文件操作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="getExternalStorageDirectory"><a href="#getExternalStorageDirectory" class="headerlink" title="getExternalStorageDirectory()"></a>getExternalStorageDirectory()</h5><p>对应外部存储路径:/storage/emulated/0</p>
+<h5 id="getExternalStoragePublicDirectory-String-type"><a href="#getExternalStoragePublicDirectory-String-type" class="headerlink" title="getExternalStoragePublicDirectory(String type)"></a>getExternalStoragePublicDirectory(String type)</h5><p>获取外部存储的共享文件夹路径如：</p>
+<blockquote>
+<p>DIRECTORY_MUSIC  音乐目录<br>DIRECTORY_PICTURES  图片目录<br>DIRECTORY_MOVIES  电影目录<br>DIRECTORY_DOWNLOADS  下载目录<br>DIRECTORY_DCIM   相机拍照或录像文件的存储目录<br>DIRECTORY_DOCUMENTS   文件文档目录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String externalStoragePublicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath();</span><br></pre></td></tr></table></figure>
+
+<p>以上便是获取相机DCIM目录，对应获取的路径为:/storage/emulated/0/DCIM。</p>
+<h3 id="系统存储目录"><a href="#系统存储目录" class="headerlink" title="系统存储目录"></a>系统存储目录</h3><h5 id="getRootDirectory"><a href="#getRootDirectory" class="headerlink" title="getRootDirectory()"></a>getRootDirectory()</h5><p>对应获取系统分区根路径:/system</p>
+<h5 id="getDataDirectory"><a href="#getDataDirectory" class="headerlink" title="getDataDirectory()"></a>getDataDirectory()</h5><p>对应获取用户数据目录路径:/data</p>
+<h5 id="getDownloadCacheDirectory"><a href="#getDownloadCacheDirectory" class="headerlink" title="getDownloadCacheDirectory()"></a>getDownloadCacheDirectory()</h5><p>对应获取用户缓存目录路径:/cache</p>
+<h2 id="相关概念区别"><a href="#相关概念区别" class="headerlink" title="相关概念区别"></a>相关概念区别</h2><h3 id="getFileDir-和getCacheDir-区别"><a href="#getFileDir-和getCacheDir-区别" class="headerlink" title="getFileDir()和getCacheDir()区别"></a>getFileDir()和getCacheDir()区别</h3><p>这两个都位于内部存储目录/data/data/packagename/下面，位于同一级别，前者是file目录下面，后面是cache目录下。<br><img src="https://img-blog.csdnimg.cn/20191204163259705.png" alt=""></p>
+<h3 id="getFileDir-和getExternalFilesDir-String-type-区别"><a href="#getFileDir-和getExternalFilesDir-String-type-区别" class="headerlink" title="getFileDir()和getExternalFilesDir(String type)区别"></a>getFileDir()和getExternalFilesDir(String type)区别</h3><p>前者位于内部存储目录/data/data/packagename/file下面，后者位于外部存储目录/storage/emulated/0/Android/data/packagename/files下面，它们都存在于应用包名下面，也就是说属于app应用的，所以当app卸载后，它们也会被删除的。</p>
+<p>对于前面提到的app下载升级功能，我们从服务器端下载的app需要放到外部存储目录下面，而不是内部存储目录，因为内部存储目录的空间很小。另外我也做了相关测试，如果将apk放到内部存储目录file下面的话，安装时会出现问题，提示解析包出错。</p>
+<h3 id="清除数据和清除缓存的区别"><a href="#清除数据和清除缓存的区别" class="headerlink" title="清除数据和清除缓存的区别"></a>清除数据和清除缓存的区别</h3><p>在app中有清除数据和清除缓存这两个概念，那么这两者分别清除的是什么目录下面的数据呢？</p>
+<h4 id="清除数据"><a href="#清除数据" class="headerlink" title="清除数据"></a>清除数据</h4><p>清除数据清除的是保存在app中所有数据，就是上面提到的位于packagename下面的所有文件，包含内部存储(/data/data/packagename/)和外部存储(/storage/emulated/0/Android/data/packagename/)。当然除了SD卡上面的数据，SD卡上面的数据当app卸载之后还会存在的。</p>
+<h4 id="清除缓存"><a href="#清除缓存" class="headerlink" title="清除缓存"></a>清除缓存</h4><p>缓存是程序运行时的临时存储空间，它可以存放从网络下载的临时图片，从用户的角度出发清除缓存对用户并没有太大的影响，但是清除缓存后用户再次使用该APP时，由于本地缓存已经被清理，所有的数据需要重新从网络上获取。为了在清除缓存的时候能够正常清除与应用相关的缓存，请将缓存文件存放在getCacheDir()或者 getExternalCacheDir()路径下。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191204152033541.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xqMTg4MjY2,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>以上便是Android系统中管存储目录的一些知识。</p>
+
+    </div>
+    <div class="wechat">
+        
+            <hr />
+            <p> 欢迎关注微信公众号 </p>
+            <img src="/img/wechat-qcode.png" />
+        
+        </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="https://github.com/crazyandcoder" target="_blank">YujieCute</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+    <a href="/2019/11/27/Java%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8classloader%E6%B5%85%E6%9E%90/" class="next-post btn btn-default" title='Java中类加载器classloader浅析'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Java中类加载器classloader浅析</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储分类"><span class="toc-text">存储分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内部存储"><span class="toc-text">内部存储</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#context-getFileDir"><span class="toc-text">context.getFileDir()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#context-getCacheDir"><span class="toc-text">context.getCacheDir()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外部存储"><span class="toc-text">外部存储</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展外部存储"><span class="toc-text">扩展外部存储</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#getExternalCacheDir"><span class="toc-text">getExternalCacheDir()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#getExternalFilesDir-String-type"><span class="toc-text">getExternalFilesDir(String type)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SD卡存储"><span class="toc-text">SD卡存储</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#getExternalStorageDirectory"><span class="toc-text">getExternalStorageDirectory()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#getExternalStoragePublicDirectory-String-type"><span class="toc-text">getExternalStoragePublicDirectory(String type)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统存储目录"><span class="toc-text">系统存储目录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#getRootDirectory"><span class="toc-text">getRootDirectory()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#getDataDirectory"><span class="toc-text">getDataDirectory()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#getDownloadCacheDirectory"><span class="toc-text">getDownloadCacheDirectory()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关概念区别"><span class="toc-text">相关概念区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#getFileDir-和getCacheDir-区别"><span class="toc-text">getFileDir()和getCacheDir()区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getFileDir-和getExternalFilesDir-String-type-区别"><span class="toc-text">getFileDir()和getExternalFilesDir(String type)区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清除数据和清除缓存的区别"><span class="toc-text">清除数据和清除缓存的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#清除数据"><span class="toc-text">清除数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#清除缓存"><span class="toc-text">清除缓存</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+    访问量:
+    <strong id="busuanzi_value_site_pv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    &nbsp; | &nbsp;
+    访客数:
+    <strong id="busuanzi_value_site_uv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>
