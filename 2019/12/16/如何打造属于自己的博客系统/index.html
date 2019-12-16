@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="码农的世界">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="博客" />
+
+
+<meta name="description" content="前言以前写博客时用的是CSDN、 博客园、新浪博客之类的博客系统，这类博客系统好处就是什么都弄好了，自己只需要写文章即可，但是一类大缺点就是广告太多，打开一篇文章，基本满屏都是广告，让人看下去的..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    如何打造属于自己的博客系统 |
+    
+    码农的世界
+</title>
+
+<link rel="alternate" href="/atom.xml" title="码农的世界" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='YujieCute'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                读万卷书，行万里路
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        码农的世界</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                全部文章</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Android/"><i class="fa "></i>
+                                Android</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Java/"><i class="fa "></i>
+                                Java</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/DSA/"><i class="fa "></i>
+                                数据结构与算法</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Other/"><i class="fa "></i>
+                                其他</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                关于</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="如何打造属于自己的博客系统">
+            
+            如何打造属于自己的博客系统
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2019/12/16</span>
+    </span>
+    
+    <span class="fa-wrap">
+        <i class="fa fa-eye"></i>
+        <span id="busuanzi_value_page_pv"></span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以前写博客时用的是CSDN、 博客园、新浪博客之类的博客系统，这类博客系统好处就是什么都弄好了，自己只需要写文章即可，但是一类大缺点就是广告太多，打开一篇文章，基本满屏都是广告，让人看下去的愿望都没有，所以一直打算先搞个自己的博客系统，专门记录一下学习过程。</p>
+<p>我的博客链接：<a href="https://crazyandcoder.work/" target="_blank" rel="noopener">https://crazyandcoder.work/</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38bafc3ec6?w=2554&h=1552&f=png&s=1543297" alt="在这里插入图片描述"></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>关于hexo的简介请看官网介绍《<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">详细介绍</a>》</p>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用<br>Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>而我们要做的就是现在本地写好文章，然后解析成HTML文件，最后再部署到github上面显示出来，总的来说，过程还是蛮简单的，而且步骤也简单，只需要几条命令即可，下面我们来具体实现。</p>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>首先需要下载一些配置软件：</p>
+<ol>
+<li><strong><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">hexo</a></strong>，生成本地的文章</li>
+<li><strong><a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js</a></strong> ，用来生成静态页面的</li>
+<li><strong><a href="https://git-scm.com/download/" target="_blank" rel="noopener">git</a></strong> ，把本地的hexo内容提交到github上去.</li>
+<li>申请<a href="https://github.com/" target="_blank" rel="noopener"><strong>github</strong></a>账号 ，部署到博客</li>
+<li>申请 <strong><a href="https://www.aliyun.com/" target="_blank" rel="noopener">阿里云</a></strong> 域名，绑定github.io</li>
+</ol>
+<p><strong>注意:</strong> 这里面申请的github账号的名称就是以后你博客的域名，所以一定要起一个有个性的名字。</p>
+<p>安装node.js和git没有啥好说，直接下载软件安装即可，傻瓜式安装。</p>
+<p>下面来说一下安装hexo，需要用到以下的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>正常情况下，输入以上命令即可安装成功，测试一下，输入命令，显示版本号即表明安装成功，如果中间过程中出现任何问题，请自行百度解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;hexo -v</span><br><span class="line">显示内容：</span><br><span class="line">Native thread-sleep not available.</span><br><span class="line">This will result in much slower performance, but it will still work.</span><br><span class="line">You should re-install spawn-sync or upgrade to the lastest version of node if po</span><br><span class="line">ssible.</span><br><span class="line">Check C:\Users\AppData\Roaming\npm\node_modules\hexo-cli\node_modules\hexo-</span><br><span class="line">util\node_modules\cross-spawn\node_modules\spawn-sync\error.log for more details</span><br><span class="line">hexo-cli: 1.0.1</span><br><span class="line">os: Windows_NT 6.1.7601 win32 ia32</span><br><span class="line">http_parser: 1.0</span><br><span class="line">node: 0.10.29</span><br><span class="line">v8: 3.14.5.9</span><br><span class="line">ares: 1.9.0-DEV</span><br><span class="line">uv: 0.10.27</span><br><span class="line">zlib: 1.2.3</span><br><span class="line">modules: 11</span><br><span class="line">openssl: 1.0.1h</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行博客系统"><a href="#运行博客系统" class="headerlink" title="运行博客系统"></a>运行博客系统</h3><p>以上软件安装好，我们就已经生成了一个博客系统，只不过这是最基础也是最简洁的博客系统，我们来测试一下。</p>
+<p>在本地磁盘新建一个目录，这以后就是我们写博客的地方啦譬如我在E盘新建一个hexo目录，同时进入到该目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;cd E:\hexo</span><br></pre></td></tr></table></figure>
+
+<p>进行初始化一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;hexo init</span><br><span class="line">显示内容：</span><br><span class="line">E:\hexo&gt;hexo init</span><br><span class="line">Native thread-sleep not available.</span><br><span class="line">This will result in much slower performance, but it will still work.</span><br><span class="line">You should re-install spawn-sync or upgrade to the lastest version of node if po</span><br><span class="line">ssible.</span><br><span class="line">Check C:\Users\liji\AppData\Roaming\npm\node_modules\hexo-cli\node_modules\hexo-</span><br><span class="line">util\node_modules\cross-spawn\node_modules\spawn-sync\error.log for more details</span><br><span class="line">INFO  Cloning hexo-starter to E:\hexo</span><br><span class="line">Cloning into &apos;E:\hexo&apos;...</span><br><span class="line">remote: Counting objects: 53, done.</span><br><span class="line">remote: Total 53 (delta 0), reused 0 (delta 0), pack-reused 53</span><br><span class="line">Unpacking objects: 100% (53/53), done.</span><br><span class="line">Checking connectivity... done.</span><br><span class="line">Submodule &apos;themes/landscape&apos; (https://github.com/hexojs/hexo-theme-landscape.git</span><br><span class="line">) registered for path &apos;themes/landscape&apos;</span><br><span class="line">Cloning into &apos;themes/landscape&apos;...</span><br><span class="line">remote: Counting objects: 724, done.</span><br><span class="line">Rremote: Total 724 (delta 0), reused 0 (delta 0), pack-reused 724eceiving object</span><br><span class="line">Receiving objects: 100% (724/724), 2.51</span><br><span class="line">Resolving deltas: 100% (381/381), done.</span><br><span class="line">Checking connectivity... done.</span><br><span class="line">Submodule path &apos;themes/landscape&apos;: checked out &apos;decdc2d9956776cbe95420ae94bac87e</span><br><span class="line">22468d38&apos;</span><br></pre></td></tr></table></figure>
+
+<p>这样就生成了一个默认的博客系统。<br>我们来查看一下默认的博客系统是什么样子，<br>输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">E:\hexo&gt;hexo generate</span><br><span class="line">等待几秒结束后，输入</span><br><span class="line">E:\hexo&gt;hexo s</span><br><span class="line">成功后会显示：</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>我们在浏览器上面输入以上地址  <strong><a href="http://localhost:4000/：" target="_blank" rel="noopener">http://localhost:4000/：</a></strong> 我们就会打开一个本地的HTML页面，这就是我们的博客原型，</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38bb2fa531?w=1200&h=583&f=png&s=228255" alt=""></p>
+<p>不过这只能在本地访问，别人还是不能访问到，要想别人也能看到的话，接下来我们就要发布到github上面去。</p>
+<h3 id="发布到GitHub"><a href="#发布到GitHub" class="headerlink" title="发布到GitHub"></a>发布到GitHub</h3><p>那么问题来了，我们该如何发布到github上面呢？</p>
+<p>1、首先我们，需要在github上面新建一个账号，点击进入github官网注册一个账号，这个账号就对应我们的博客访问地址，譬如，我注册的账号就是crazyandcoder，那么我的博客访问地址就是<a href="http://crazyandcoder.github.io" target="_blank" rel="noopener"><strong>http://crazyandcoder.github.io/</strong></a></p>
+<p>2、新建一个repository,输入名字。<br><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38bb11a638?w=744&h=559&f=png&s=75301" alt="在这里插入图片描述"></p>
+<p>3、配置我们的hexo init生成的配置文件</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38bc2b5dd0?w=849&h=389&f=png&s=94213" alt="在这里插入图片描述"><br>4、在最后面添加我们刚刚新建的repository，里面的test就是我们刚刚创建的repository<br><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38bdf7e0d8?w=737&h=158&f=png&s=11453" alt="在这里插入图片描述"><br>5、最后发布</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>测试，在浏览器中输入博客地址 <strong>http://账户名.github.io/</strong> 就可以进行测试了，别人也可以访问了。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>以后我们进行写文章到发布到我们的博客系统上去总共要经历一下几个步骤：</p>
+<ol>
+<li>hexo new ”postName” #新建文章</li>
+<li>hexo new page ”pageName” #新建页面</li>
+<li>hexo generate #生成静态页面至public目录</li>
+<li>hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）</li>
+<li>hexo deploy #将.deploy目录部署到GitHub</li>
+</ol>
+<p>其中第一步在本地创建文章，会在本地博客目录下生成文章。<br><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38bfbe6f72?w=848&h=257&f=png&s=85224" alt="在这里插入图片描述"><br>然后我们就可以打开文件，在里面写文章。</p>
+<p>写好文章后，我们需要将其生成HTML文件，如何生成，这就需要使用第三步的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<p>生成文章后，我们首先可以在本地预览一下，如果没有什么问题的话可以发布到github上面。使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo depoly</span><br></pre></td></tr></table></figure>
+
+<p>等待几秒即可发布完成</p>
+<h3 id="博客主题选取"><a href="#博客主题选取" class="headerlink" title="博客主题选取"></a>博客主题选取</h3><p>以上就是用hexo + github搭建自己的博客系统的内容。最后附上一些常用的hexo主题，供大家自己选择：<a href="https://hexo.io/themes/" target="_blank" rel="noopener"><strong>传送门+hexo主题</strong></a></p>
+<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><p>我自己用的域名是阿里云域名，很便宜，一年不到10块钱，很划算，接下来我们需要将上面<strong>http://账户名.github.io/</strong> 绑定自己申请的域名上面，这样我们就可以直接访问域名就可以查看博客了。</p>
+<h3 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h3><p>域名的话，我推荐阿里云，毕竟大公司，靠谱。我们购买域名的时候，首先需要查询一下，这个域名有没有被别人注册过。<a href="https://wanwang.aliyun.com/domain/" target="_blank" rel="noopener"><strong>域名查询</strong></a>，到这个网址上面查询一下，如果没有被注册过，即表明你可以申请使用的。譬如，我们搜索jackboyblog.tech这个博客域名，没有被注册，你就可以购买，资金充足可以购买顶级域名，不然的可以选择一些普通的，譬如tech.work等。我自己的就是work，很便宜，才几块钱一年。<br><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38ee42f2e5?w=1732&h=662&f=png&s=179533" alt="在这里插入图片描述"></p>
+<h3 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h3><p>（1）在你的github博客仓库下创建一个名字为 CNAME的文件，在其中填写你的域名地址 ，注意 ：不要包含Http://和www</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38ecce4e0c?w=2024&h=1486&f=png&s=460891" alt="在这里插入图片描述"></p>
+<p><strong>注意</strong>： 不要包含Http://和www<br><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38eeaf3c98?w=2008&h=422&f=png&s=110134" alt="在这里插入图片描述"><br>（2）进入你的博客github仓库  ，点击settings,查看Custom domian这一项是否已经填写好并保存 </p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38ff148d00?w=1396&h=266&f=png&s=52186" alt="在这里插入图片描述"></p>
+<p>（3）解析你的域名，你可以在终端中ping一下你的 github博客的地址，得到ip<br><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed39010cc676?w=886&h=72&f=png&s=25665" alt="在这里插入图片描述"></p>
+<p>（4）进入域名解析控制台，点击解析，点击 添加纪录  ，记录类型选择A，主机记录填：www        记录值填你的IP     TTL默认就好了（调大TTL值可以提高域名的解析稳定性和速度，如果近期要更改IP的话建议调小点）</p>
+<p>再点击 添加记录   记录类型选择A，主机记录填：@        记录值填你的IP     TTL默认就好了；</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed3909b02019?w=1100&h=708&f=png&s=202667" alt="在这里插入图片描述"></p>
+<p>经过以上步骤，我们过个10分钟左右即可访问自己的域名博客了。我的是：<a href="https://crazyandcoder.work/" target="_blank" rel="noopener">https://crazyandcoder.work/</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/13/16efed38bafc3ec6?w=2554&h=1552&f=png&s=1543297" alt="在这里插入图片描述"></p>
+<p>以上便是搭建自己博客系统所有的步骤，记录总结一下，有需要的朋友可以参考一下。</p>
+
+    </div>
+    <div class="wechat">
+        
+            <hr />
+            <p> 欢迎关注微信公众号 </p>
+            <img src="/img/wechat-qcode.png" />
+        
+        </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="https://github.com/crazyandcoder" target="_blank">YujieCute</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+    <a href="/2019/12/05/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-Java%E5%AE%9E%E7%8E%B0/" class="next-post btn btn-default" title='排序算法总结-Java实现'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            排序算法总结-Java实现</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-text">正文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建过程"><span class="toc-text">搭建过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行博客系统"><span class="toc-text">运行博客系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发布到GitHub"><span class="toc-text">发布到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结："><span class="toc-text">总结：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客主题选取"><span class="toc-text">博客主题选取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定域名"><span class="toc-text">绑定域名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#购买域名"><span class="toc-text">购买域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#域名解析"><span class="toc-text">域名解析</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+    访问量:
+    <strong id="busuanzi_value_site_pv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    &nbsp; | &nbsp;
+    访客数:
+    <strong id="busuanzi_value_site_uv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>
