@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="李JI的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="0.0.1">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="Java,反射" />
+
+
+<meta name="description" content="反射经常听到这个词，但是总是不理解这个意思。今天便来理解一下反射这个概念，为什么说在框架设计中，反射用到的比较多。本文记录一下学习反射方面的知识点。
+反射概念JAVA反射机制是在运行状态中，对于..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Java学习总结-反射 |
+    
+    李JI的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="李JI的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='YujieCute'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                读万卷书，行万里路
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        李JI的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                全部文章</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Android/"><i class="fa "></i>
+                                Android</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Java/"><i class="fa "></i>
+                                Java</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/RN/"><i class="fa "></i>
+                                前端</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/DSA/"><i class="fa "></i>
+                                数据结构与算法</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Other/"><i class="fa "></i>
+                                面试</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间线</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                关于</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Java学习总结-反射">
+            
+            Java学习总结-反射
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Java/">Java</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Java/" rel="tag">Java</a> <a class="tag-link" href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag">反射</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2017/12/20</span>
+    </span>
+    
+    <span class="fa-wrap">
+        <i class="fa fa-eye"></i>
+        <span id="busuanzi_value_page_pv"></span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文于<strong>
+                799</strong>
+            天之前发表，文中内容可能已经过时。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>反射经常听到这个词，但是总是不理解这个意思。今天便来理解一下反射这个概念，为什么说在框架设计中，反射用到的比较多。本文记录一下学习反射方面的知识点。</p>
+<h3 id="反射概念"><a href="#反射概念" class="headerlink" title="反射概念"></a>反射概念</h3><p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。概念比较精确、抽象但是不便于理解。譬如我们存在一个类，它的相关属性、方法、构造器都是 private 类型的，对于这样一个类，我们不能通过 new 的方式来创建一个它的对象，更不能通过平常使用方法属性的方式来调用这个类的属性、方法，甚至来创建它的对象，但是通过反射这种方式却可以生成它的对象以及调用它的属性、方法。</p>
+<h4 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h4><p>Class 与 class 有着本质的区别。小写的 class 是 Java 中的关键字，而大写的 Class 则是类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public final class Class&lt;T&gt; implements java.io.Serializable,</span><br><span class="line">                              GenericDeclaration,</span><br><span class="line">                              Type,</span><br><span class="line">                              AnnotatedElement &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Java 的世界里，一切皆是对象，在 Java 中存在两种对象，一种是 new 产生的对象另一种则是 Class 对象。一般的对象，我们可以通过 new 关键字来产生，而 Class 对象则不可以，因为它是 JVM 生成用来保存对应类的信息的。也就是说，如：当我们定义了一个类 Person 时，编译成功后，将会生成一个 Person.class 字节码，这个时候编译器同时为我们从创建了一个 Class 对象并将它保存在 Person.class 文件中。也就是说：Person.java 编译成 Person.class 后将会产生一个对应的Class 对象。</p>
+<h4 id="Class-对象获取"><a href="#Class-对象获取" class="headerlink" title="Class 对象获取"></a>Class 对象获取</h4><p>一般情况下，一个实例对象对应的 Class 对象有以下三种方式获取：</p>
+<p>1、通过实例变量的 getClass 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person person = new Person();</span><br><span class="line">Class personClass = person.getClass();</span><br><span class="line">System.out.println(&quot;class1: &quot; + personClass);</span><br></pre></td></tr></table></figure>
+
+<p>2、直接给出对象类文件的.class：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class personClass1=Person.class;</span><br><span class="line">System.out.println(&quot;class2: &quot; + personClass1);</span><br></pre></td></tr></table></figure>
+
+<p>如果不能通过 new 关键字来创建对象的话，我们也可以通过第三种方式来获取：</p>
+<p>3、通过类Class的静态方法forName():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">          Class personClass2 = Class.forName(&quot;reflect.Person&quot;);</span><br><span class="line">          System.out.println(&quot;class3: &quot; + personClass2);</span><br><span class="line">      &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class1: class reflect.Person</span><br><span class="line">class2: class reflect.Person</span><br><span class="line">class3: class reflect.Person</span><br></pre></td></tr></table></figure>
+
+<h4 id="Class-使用"><a href="#Class-使用" class="headerlink" title="Class 使用"></a>Class 使用</h4><p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
+<p><strong>1、CLASS 名称获取</strong><br>对于 name 的获取，Class 类提供了三种方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class.getName();</span><br><span class="line">Class.getSimpleName();</span><br><span class="line">Class.getCanonicalName();</span><br></pre></td></tr></table></figure>
+
+<p>那么这三种方式有何区别？通过具体的实例还说明。</p>
+<p>首先我们得创建一个类 Person.java </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package reflect;</span><br><span class="line">public class Person &#123;</span><br><span class="line">    private int age;</span><br><span class="line">    private String name;</span><br><span class="line">    public Person() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    public Person(int age, String name) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后分别获取它的 Class 名称：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">      //getName()方式</span><br><span class="line">      Person person = new Person();</span><br><span class="line">      Class personClass = person.getClass();</span><br><span class="line">      System.out.println(&quot;class1: &quot; + personClass.getName());</span><br><span class="line"> //getSimpleName()方式</span><br><span class="line">      Class personClass1=Person.class;</span><br><span class="line">      System.out.println(&quot;class2: &quot; + personClass1.getSimpleName());</span><br><span class="line">//getCanonicalName()方式</span><br><span class="line">      try &#123;</span><br><span class="line">          Class personClass2 = Class.forName(&quot;reflect.Person&quot;);</span><br><span class="line">          System.out.println(&quot;class3: &quot; + personClass2.getCanonicalName());</span><br><span class="line">      &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class1: reflect.Person</span><br><span class="line">class2: Person</span><br><span class="line">class3: reflect.Person</span><br></pre></td></tr></table></figure>
+
+<p>可以看到第一种和第三种方式获取的结果是一样的，而只有第二种不一样。及一三中获取的是类的完整路径，而第二种获取的是类名，不包含包名。而一三种有何区别可以通过类的内部类来研究。</p>
+<p><strong>2、修饰符获取</strong><br>Java 中的修饰符主要有 private 、public 、static、protected、等。Java 反射提供了 API 去获取这些修饰符。</p>
+<p>通过 Class.getModifiers() 来获取修饰符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person person = new Person();</span><br><span class="line">Class personClass = person.getClass();</span><br><span class="line">System.out.println(&quot;modifiers: &quot; + personClass.getModifiers());</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modifiers: 1</span><br></pre></td></tr></table></figure>
+
+<p>返回的却是一个 int 型的数值。为什么会返回一个整型数值呢？这是因为一个类定义的时候可能会被多个修饰符修饰，为了一并获取，所以 Java 工程师考虑到了位运算，用一个 int 数值来记录所有的修饰符，然后不同的位对应不同的修饰符，这些修饰符对应的位都定义在 Modifier 这个类当中。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class Modifier &#123;</span><br><span class="line">    public static final int PUBLIC           = 0x00000001;</span><br><span class="line">    public static final int PRIVATE          = 0x00000002;</span><br><span class="line">    public static final int PROTECTED        = 0x00000004;</span><br><span class="line">    public static final int STATIC           = 0x00000008;</span><br><span class="line">    public static final int FINAL            = 0x00000010;</span><br><span class="line">	......</span><br><span class="line">	public static String toString(int mod) &#123;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        int len;</span><br><span class="line">        if ((mod &amp; PUBLIC) != 0)        sb.append(&quot;public &quot;);</span><br><span class="line">        if ((mod &amp; PROTECTED) != 0)     sb.append(&quot;protected &quot;);</span><br><span class="line">        if ((mod &amp; PRIVATE) != 0)       sb.append(&quot;private &quot;);</span><br><span class="line">        /* Canonical order */</span><br><span class="line">        if ((mod &amp; ABSTRACT) != 0)      sb.append(&quot;abstract &quot;);</span><br><span class="line">        if ((mod &amp; STATIC) != 0)        sb.append(&quot;static &quot;);</span><br><span class="line">        if ((mod &amp; FINAL) != 0)         sb.append(&quot;final &quot;);</span><br><span class="line">        if ((mod &amp; TRANSIENT) != 0)     sb.append(&quot;transient &quot;);</span><br><span class="line">        if ((mod &amp; VOLATILE) != 0)      sb.append(&quot;volatile &quot;);</span><br><span class="line">        if ((mod &amp; SYNCHRONIZED) != 0)  sb.append(&quot;synchronized &quot;);</span><br><span class="line">        if ((mod &amp; NATIVE) != 0)        sb.append(&quot;native &quot;);</span><br><span class="line">        if ((mod &amp; STRICT) != 0)        sb.append(&quot;strictfp &quot;);</span><br><span class="line">        if ((mod &amp; INTERFACE) != 0)     sb.append(&quot;interface &quot;);</span><br><span class="line">        if ((len = sb.length()) &gt; 0)    /* trim trailing space */</span><br><span class="line">            return sb.toString().substring(0, len-1);</span><br><span class="line">        return &quot;&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然如果需要打印字符串的话，可以通过 Modifier 类提供的静态方法toString 来获取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;modifiers: &quot; + Modifier.toString(personClass.getModifiers()));</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3、获取 CLASS 的成员</strong><br>一个类的成员包括属性、方法、构造函数。对应到 Class 中就是 Field、Method、Constructor。接下来我们通过具体实例来熟悉如何获取这些成员。</p>
+<p><strong>3.1、获取 Field</strong><br>获取指定名称的属性 API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public Field getDeclaredField(String name)</span><br><span class="line">                       throws NoSuchFieldException,</span><br><span class="line">                              SecurityException;</span><br><span class="line">public Field getField(String name)</span><br><span class="line">               throws NoSuchFieldException,</span><br><span class="line">                      SecurityException</span><br></pre></td></tr></table></figure>
+
+<p>两者的区别就是 getDeclaredField() 获取的是 Class 中被 private 修饰的属性。 getField() 方法获取的是非私有属性，并且 getField() 在当前 Class 获取不到时会向祖先类获取。</p>
+<p>获取所有的属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//获取所有的属性，但不包括从父类继承下来的属性</span><br><span class="line">public Field[] getDeclaredFields() throws SecurityException &#123;&#125;</span><br><span class="line"></span><br><span class="line">//获取自身的所有的 public 属性，包括从父类继承下来的。</span><br><span class="line">public Field[] getFields() throws SecurityException &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.2、获取 Method</strong><br>Method 即是 Class 中的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes)</span><br><span class="line">public Method getMethod(String name, Class&lt;?&gt;... parameterTypes)</span><br><span class="line">public Method[] getDeclaredMethods() throws SecurityException</span><br><span class="line">public Method getMethod(String name, Class&lt;?&gt;... parameterTypes)</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.3、获取 Constructor</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public Constructor&lt;T&gt; getDeclaredConstructor(Class&lt;?&gt;... parameterTypes)</span><br><span class="line">public Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)</span><br><span class="line">public Constructor&lt;?&gt;[] getDeclaredConstructors() throws SecurityException </span><br><span class="line">public Constructor&lt;?&gt;[] getConstructors() throws SecurityException</span><br></pre></td></tr></table></figure>
+
+<h4 id="反射运用"><a href="#反射运用" class="headerlink" title="反射运用"></a>反射运用</h4><p>以上便是简单的获取 Class 中的字段、方法、构造函数，反射的机制便是操控这些字段、方法、构造函数。</p>
+
+    </div>
+    <div class="wechat">
+        
+            <hr />
+            <p> 欢迎关注微信公众号 </p>
+            <img src="/img/wechat-qcode.png" />
+        
+        </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="https://github.com/crazyandcoder" target="_blank">crazyandcoder</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2018/06/20/2018%E5%B9%B46%E6%9C%88%E4%B8%8A%E6%B5%B7%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%8E%86/" class="pre-post btn btn-default" title='2018年6月上海面试经历'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            2018年6月上海面试经历</span>
+    </a>
+    
+    
+    <a href="/2017/11/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E6%B3%A8%E8%A7%A3/" class="next-post btn btn-default" title='Java学习总结-注解'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Java学习总结-注解</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#反射概念"><span class="toc-text">反射概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Class-对象获取"><span class="toc-text">Class 对象获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Class-使用"><span class="toc-text">Class 使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反射运用"><span class="toc-text">反射运用</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+    访问量:
+    <strong id="busuanzi_value_site_pv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    &nbsp; | &nbsp;
+    访客数:
+    <strong id="busuanzi_value_site_uv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2014
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>

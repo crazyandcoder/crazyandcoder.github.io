@@ -1,0 +1,664 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="李JI的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="0.0.1">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="Github,API" />
+
+
+<meta name="description" content="今天整理了一下GitHub 开放出来API，将它罗列出来，用这些API可获取GitHub上面的数据，返回格式为json，通过使用这些数据，可以用Flutter，ReactNative，Andro..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    打造App-GitHub 开放API大总结 |
+    
+    李JI的博客
+</title>
+
+<link rel="alternate" href="/atom.xml" title="李JI的博客" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='YujieCute'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                读万卷书，行万里路
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        李JI的博客</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                全部文章</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Android/"><i class="fa "></i>
+                                Android</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Java/"><i class="fa "></i>
+                                Java</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/RN/"><i class="fa "></i>
+                                前端</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/DSA/"><i class="fa "></i>
+                                数据结构与算法</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Other/"><i class="fa "></i>
+                                面试</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间线</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                关于</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="打造App-GitHub 开放API大总结">
+            
+            打造App-GitHub 开放API大总结
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Android/">Android</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/API/" rel="tag">API</a> <a class="tag-link" href="/tags/Github/" rel="tag">Github</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2019/12/19</span>
+    </span>
+    
+    <span class="fa-wrap">
+        <i class="fa fa-eye"></i>
+        <span id="busuanzi_value_page_pv"></span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>今天整理了一下GitHub 开放出来API，将它罗列出来，用这些API可获取GitHub上面的数据，返回格式为json，通过使用这些数据，可以用Flutter，ReactNative，Android，iOS等技术开发出这款GitHub客户端练练手，巩固所学知识，岂不是高效率学习一门新技术的手段？</p>
+<p>这套API列表主要包含了一下几个方面的内容：</p>
+<ol>
+<li>登陆认证信息</li>
+<li>All Activity的信息</li>
+<li>Trending的信息</li>
+<li>个人用户信息</li>
+<li>Repos包含的所有信息</li>
+</ol>
+<p>下面详细列出每个方面的API，并给出所调用链接及返回的json结果信息。完整的API及返回的结果请查看链接 <a href="https://github.com/crazyandcoder/awesome-github-api" target="_blank" rel="noopener"><strong>awesome-github-api</strong></a></p>
+<h2 id="1-登陆"><a href="#1-登陆" class="headerlink" title="1. 登陆"></a>1. 登陆</h2><p>建议使用OAuth2认证登陆，安全。相关链接：<a href="https://developer.github.com/v3/#authentication" target="_blank" rel="noopener">https://developer.github.com/v3/#authentication</a></p>
+<h2 id="2-关于我的-API"><a href="#2-关于我的-API" class="headerlink" title="2. 关于我的-API"></a>2. 关于我的-API</h2><p>我的页面所涉及到的API，包括：</p>
+<ol>
+<li>我的主页</li>
+<li>我的关注</li>
+<li>我的仓库</li>
+<li>我的粉丝</li>
+</ol>
+<h3 id="2-1-我的个人主页"><a href="#2-1-我的个人主页" class="headerlink" title="2.1 我的个人主页"></a>2.1 我的个人主页</h3><h4 id="2-1-1-请求说明"><a href="#2-1-1-请求说明" class="headerlink" title="2.1.1 请求说明"></a>2.1.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://api.github.com/user?access_token={token值}" target="_blank" rel="noopener">https://api.github.com/user?access_token={token值}</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数</td>
+<td>access_token</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="2-1-2-返回响应"><a href="#2-1-2-返回响应" class="headerlink" title="2.1.2 返回响应"></a>2.1.2 返回响应</h4><p>详细json结果请看链接  <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/%E6%88%91%E7%9A%84-API.md" target="_blank" rel="noopener">我的个人信息json解析结果</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe35fb5603?w=2080&h=1164&f=png&s=346885" alt="在这里插入图片描述"></p>
+<h3 id="2-2-我的关注-Following"><a href="#2-2-我的关注-Following" class="headerlink" title="2.2 我的关注 Following"></a>2.2 我的关注 Following</h3><h4 id="2-2-1-请求说明"><a href="#2-2-1-请求说明" class="headerlink" title="2.2.1 请求说明"></a>2.2.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://api.github.com/users/{user}/following" target="_blank" rel="noopener">https://api.github.com/users/{user}/following</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>page</td>
+<td>int类型</td>
+</tr>
+<tr>
+<td>参数2</td>
+<td>user</td>
+<td>某个用户</td>
+</tr>
+<tr>
+<td>例如</td>
+<td><a href="https://api.github.com/users/crazyandcoder/following?page=1" target="_blank" rel="noopener">https://api.github.com/users/crazyandcoder/following?page=1</a></td>
+<td>需要分页处理</td>
+</tr>
+</tbody></table>
+<h4 id="2-2-2-返回响应"><a href="#2-2-2-返回响应" class="headerlink" title="2.2.2 返回响应"></a>2.2.2 返回响应</h4><p>备注：结果返回一个数组</p>
+<p>详细json结果请看链接  <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/%E6%88%91%E7%9A%84-API.md" target="_blank" rel="noopener">我的个人信息json解析结果</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe361e4812?w=2078&h=1158&f=png&s=425988" alt="在这里插入图片描述"></p>
+<h3 id="2-3-我的粉丝-Followers"><a href="#2-3-我的粉丝-Followers" class="headerlink" title="2.3 我的粉丝 Followers"></a>2.3 我的粉丝 Followers</h3><h4 id="2-3-1-请求说明"><a href="#2-3-1-请求说明" class="headerlink" title="2.3.1 请求说明"></a>2.3.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://api.github.com/users/{user}/followers?page=1" target="_blank" rel="noopener">https://api.github.com/users/{user}/followers?page=1</a></td>
+<td>支持分页</td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>page</td>
+<td>int类型</td>
+</tr>
+<tr>
+<td>参数2</td>
+<td>user</td>
+<td>我的用户loginName</td>
+</tr>
+<tr>
+<td>例如</td>
+<td><a href="https://api.github.com/users/crazyandcoder/followers?page=1" target="_blank" rel="noopener">https://api.github.com/users/crazyandcoder/followers?page=1</a></td>
+<td>需要分页处理</td>
+</tr>
+</tbody></table>
+<h4 id="2-3-2-返回响应"><a href="#2-3-2-返回响应" class="headerlink" title="2.3.2 返回响应"></a>2.3.2 返回响应</h4><p>详细json结果请看链接  <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/%E6%88%91%E7%9A%84-API.md" target="_blank" rel="noopener">我的个人信息json解析结果</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe3651179c?w=2080&h=1158&f=png&s=425220" alt="在这里插入图片描述"></p>
+<h3 id="2-4-我的仓库-Repositories"><a href="#2-4-我的仓库-Repositories" class="headerlink" title="2.4 我的仓库 Repositories"></a>2.4 我的仓库 Repositories</h3><h4 id="2-4-1-请求说明"><a href="#2-4-1-请求说明" class="headerlink" title="2.4.1 请求说明"></a>2.4.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://api.github.com/user/repos?affiliation=owner&amp;direction=asc&amp;page=1&amp;sort=full_name&amp;visibility=all" target="_blank" rel="noopener">https://api.github.com/user/repos?affiliation=owner&amp;direction=asc&amp;page=1&amp;sort=full_name&amp;visibility=all</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>affiliation</td>
+<td>隶属关系，固定值owner</td>
+</tr>
+<tr>
+<td>参数2</td>
+<td>direction</td>
+<td>排序方式，asc升序，desc降序</td>
+</tr>
+<tr>
+<td>参数3</td>
+<td>page</td>
+<td>分页</td>
+</tr>
+<tr>
+<td>参数4</td>
+<td></td>
+<td>sort</td>
+</tr>
+<tr>
+<td>参数5</td>
+<td>visibility</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="2-4-2-返回响应"><a href="#2-4-2-返回响应" class="headerlink" title="2.4.2 返回响应"></a>2.4.2 返回响应</h4><p>详细json结果请看链接  <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/%E6%88%91%E7%9A%84-API.md" target="_blank" rel="noopener">我的个人信息json解析结果</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe3673d7dd?w=2080&h=1160&f=png&s=530208" alt="在这里插入图片描述"></p>
+<h2 id="3-关于All-activity-API"><a href="#3-关于All-activity-API" class="headerlink" title="3. 关于All activity-API"></a>3. 关于All activity-API</h2><p>All activity所涉及到的API，包括：</p>
+<h3 id="3-1-All-activity"><a href="#3-1-All-activity" class="headerlink" title="3.1 All activity"></a>3.1 All activity</h3><h4 id="3-1-1-请求说明"><a href="#3-1-1-请求说明" class="headerlink" title="3.1.1 请求说明"></a>3.1.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://api.github.com/users/{user}/received_events?name={}&amp;page=1" target="_blank" rel="noopener">https://api.github.com/users/{user}/received_events?name={}&amp;page=1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>user</td>
+<td></td>
+</tr>
+<tr>
+<td>参数2</td>
+<td>name</td>
+<td></td>
+</tr>
+<tr>
+<td>参数3</td>
+<td>page</td>
+<td></td>
+</tr>
+<tr>
+<td>demo</td>
+<td><a href="https://api.github.com/users/crazyandcoder/received_events?name=crazyandcoder&amp;page=1" target="_blank" rel="noopener">https://api.github.com/users/crazyandcoder/received_events?name=crazyandcoder&amp;page=1</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="3-1-2-返回响应"><a href="#3-1-2-返回响应" class="headerlink" title="3.1.2 返回响应"></a>3.1.2 返回响应</h4><p> <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/All-Activity%E8%BF%94%E5%9B%9E%E7%9A%84%E7%BB%93%E6%9E%9Cjson.md" target="_blank" rel="noopener">All-Activity返回的结果json</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe394d2731?w=2082&h=1158&f=png&s=221418" alt="在这里插入图片描述"></p>
+<h2 id="4-关于Trending-API"><a href="#4-关于Trending-API" class="headerlink" title="4. 关于Trending-API"></a>4. 关于Trending-API</h2><p>Trending所涉及到的API，包括：</p>
+<ol>
+<li>Trending-Repositories</li>
+<li>Trending-Developers</li>
+</ol>
+<h3 id="4-1-Trending-Repositories"><a href="#4-1-Trending-Repositories" class="headerlink" title="4.1 Trending-Repositories"></a>4.1 Trending-Repositories</h3><h4 id="4-1-1-请求说明"><a href="#4-1-1-请求说明" class="headerlink" title="4.1.1 请求说明"></a>4.1.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://github-trending-api.now.sh/repositories?since={}" target="_blank" rel="noopener">https://github-trending-api.now.sh/repositories?since={}</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>since</td>
+<td>参考值有daily-weekly-monthly</td>
+</tr>
+<tr>
+<td>demo</td>
+<td><a href="https://github-trending-api.now.sh/repositories?since=daily" target="_blank" rel="noopener">https://github-trending-api.now.sh/repositories?since=daily</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="4-1-2-返回响应"><a href="#4-1-2-返回响应" class="headerlink" title="4.1.2 返回响应"></a>4.1.2 返回响应</h4><p> <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/Trending-Repositories%E8%BF%94%E5%9B%9E%E6%89%80%E6%9C%89%E7%9A%84%E7%BB%93%E6%9E%9Cjson.md" target="_blank" rel="noopener">Trending-Repositories返回所有的结果json</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe39f41411?w=2078&h=1158&f=png&s=286193" alt="在这里插入图片描述"></p>
+<h3 id="4-2-Trending-Developers"><a href="#4-2-Trending-Developers" class="headerlink" title="4.2 Trending-Developers"></a>4.2 Trending-Developers</h3><h4 id="4-2-1-请求说明"><a href="#4-2-1-请求说明" class="headerlink" title="4.2.1 请求说明"></a>4.2.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://github-trending-api.now.sh/developers?since={}" target="_blank" rel="noopener">https://github-trending-api.now.sh/developers?since={}</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>since</td>
+<td>参考值有daily-weekly-monthly</td>
+</tr>
+<tr>
+<td>demo</td>
+<td><a href="https://github-trending-api.now.sh/developers?since=daily" target="_blank" rel="noopener">https://github-trending-api.now.sh/developers?since=daily</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="4-2-2-返回响应"><a href="#4-2-2-返回响应" class="headerlink" title="4.2.2 返回响应"></a>4.2.2 返回响应</h4><p> <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/Trending-Developers%E8%BF%94%E5%9B%9E%E6%89%80%E6%9C%89%E7%9A%84%E7%BB%93%E6%9E%9Cjson.md" target="_blank" rel="noopener">Trending-Developers返回所有的结果json</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe7345441c?w=2078&h=1158&f=png&s=258014" alt="在这里插入图片描述"></p>
+<h2 id="5-关于User-Repos-API"><a href="#5-关于User-Repos-API" class="headerlink" title="5. 关于User-Repos-API"></a>5. 关于User-Repos-API</h2><p>User-Repos所涉及到的API，包括：</p>
+<ol>
+<li>User 某个用户的信息</li>
+<li>Repos 某个用户下某个仓库的信息</li>
+</ol>
+<h3 id="5-1-User"><a href="#5-1-User" class="headerlink" title="5.1 User"></a>5.1 User</h3><p>查询某个用户的信息</p>
+<h4 id="5-1-1-请求说明"><a href="#5-1-1-请求说明" class="headerlink" title="5.1.1 请求说明"></a>5.1.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td>URL    <a href="https://api.github.com/users/{user}" target="_blank" rel="noopener">https://api.github.com/users/{user}</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>user</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>demo</td>
+<td>URL    <a href="https://api.github.com/users/arvidn" target="_blank" rel="noopener">https://api.github.com/users/arvidn</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="5-1-2-返回响应"><a href="#5-1-2-返回响应" class="headerlink" title="5.1.2 返回响应"></a>5.1.2 返回响应</h4><p> <a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/User-Repos-API.md" target="_blank" rel="noopener">User-Repos-API结果返回的json</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe75d911c9?w=2078&h=1158&f=png&s=312893" alt="在这里插入图片描述"></p>
+<h3 id="5-2-Repos"><a href="#5-2-Repos" class="headerlink" title="5.2 Repos"></a>5.2 Repos</h3><p>查询某个用户下的某个Repos信息</p>
+<h4 id="5-2-1-请求说明"><a href="#5-2-1-请求说明" class="headerlink" title="5.2.1 请求说明"></a>5.2.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://api.github.com/repos/{user}/{repos}" target="_blank" rel="noopener">https://api.github.com/repos/{user}/{repos}</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>user</td>
+<td>某个用户</td>
+</tr>
+<tr>
+<td>参数2</td>
+<td>repos</td>
+<td>该用户下的某个仓库名</td>
+</tr>
+<tr>
+<td>demo</td>
+<td><a href="https://api.github.com/repos/xingshaocheng/architect-awesome" target="_blank" rel="noopener">https://api.github.com/repos/xingshaocheng/architect-awesome</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe78751457?w=2080&h=1158&f=png&s=466660" alt="在这里插入图片描述"></p>
+<h4 id="5-2-2-返回响应"><a href="#5-2-2-返回响应" class="headerlink" title="5.2.2 返回响应"></a>5.2.2 返回响应</h4><p><a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/User-Repos-API.md" target="_blank" rel="noopener">User-Repos-API结果返回的json</a></p>
+<h2 id="6-关于搜索-API"><a href="#6-关于搜索-API" class="headerlink" title="6. 关于搜索-API"></a>6. 关于搜索-API</h2><p>搜索所涉及到的API，包括：</p>
+<ol>
+<li>搜索整个GitHub仓库内容</li>
+</ol>
+<h3 id="6-1-搜索"><a href="#6-1-搜索" class="headerlink" title="6.1 搜索"></a>6.1 搜索</h3><p>搜索整个GitHub仓库内容</p>
+<h4 id="6-1-1-请求说明"><a href="#6-1-1-请求说明" class="headerlink" title="6.1.1 请求说明"></a>6.1.1 请求说明</h4><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>URL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求URL</td>
+<td><a href="https://api.github.com/search/repositories?q={content}" target="_blank" rel="noopener">https://api.github.com/search/repositories?q={content}</a></td>
+<td></td>
+</tr>
+<tr>
+<td>参数1</td>
+<td>q</td>
+<td>搜索的内容</td>
+</tr>
+<tr>
+<td>demo</td>
+<td><a href="https://api.github.com/search/repositories?q=citypicker" target="_blank" rel="noopener">https://api.github.com/search/repositories?q=citypicker</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="6-1-2-返回响应"><a href="#6-1-2-返回响应" class="headerlink" title="6.1.2 返回响应"></a>6.1.2 返回响应</h4><p><a href="https://github.com/crazyandcoder/awesome-github-api/blob/master/doc/%E6%90%9C%E7%B4%A2%E8%BF%94%E5%9B%9E%E6%89%80%E6%9C%89%E5%86%85%E5%AE%B9.md" target="_blank" rel="noopener">搜索返回所有内容json</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/19/16f1dcfe7cecf515?w=2078&h=1158&f=png&s=491155" alt="在这里插入图片描述"></p>
+<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>利用上面的API我们基本可以获取GitHub的全部数据，有了这些靠谱的网络数据，通过组织这些数据，可以使用RN，Flutter，Android，iOS等技术开发一款GitHub客户端，巩固我们所学知识，提升学习效率，这是一个很不错的途径。</p>
+
+    </div>
+    <div class="wechat">
+        
+            <hr />
+            <p> 欢迎关注微信公众号 </p>
+            <img src="/img/wechat-qcode.png" />
+        
+        </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="https://github.com/crazyandcoder" target="_blank">crazyandcoder</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2019/12/24/Git%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" class="pre-post btn btn-default" title='Git使用总结'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Git使用总结</span>
+    </a>
+    
+    
+    <a href="/2019/12/17/RN%E5%AE%9E%E7%8E%B0%E4%BB%BF%E4%BD%99%E9%A2%9D%E5%AE%9D%E4%BD%99%E9%A2%9D%E6%95%B0%E5%AD%97%E7%BF%BB%E6%BB%9A%E5%8A%A8%E7%94%BB%E7%89%B9%E6%95%88/" class="next-post btn btn-default" title='RN实现仿余额宝余额数字翻滚动画特效'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            RN实现仿余额宝余额数字翻滚动画特效</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-登陆"><span class="toc-text">1. 登陆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-关于我的-API"><span class="toc-text">2. 关于我的-API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-我的个人主页"><span class="toc-text">2.1 我的个人主页</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-请求说明"><span class="toc-text">2.1.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-返回响应"><span class="toc-text">2.1.2 返回响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-我的关注-Following"><span class="toc-text">2.2 我的关注 Following</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-请求说明"><span class="toc-text">2.2.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-返回响应"><span class="toc-text">2.2.2 返回响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-我的粉丝-Followers"><span class="toc-text">2.3 我的粉丝 Followers</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-请求说明"><span class="toc-text">2.3.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-返回响应"><span class="toc-text">2.3.2 返回响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-我的仓库-Repositories"><span class="toc-text">2.4 我的仓库 Repositories</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-1-请求说明"><span class="toc-text">2.4.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-返回响应"><span class="toc-text">2.4.2 返回响应</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-关于All-activity-API"><span class="toc-text">3. 关于All activity-API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-All-activity"><span class="toc-text">3.1 All activity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-请求说明"><span class="toc-text">3.1.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-返回响应"><span class="toc-text">3.1.2 返回响应</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-关于Trending-API"><span class="toc-text">4. 关于Trending-API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Trending-Repositories"><span class="toc-text">4.1 Trending-Repositories</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-请求说明"><span class="toc-text">4.1.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-返回响应"><span class="toc-text">4.1.2 返回响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Trending-Developers"><span class="toc-text">4.2 Trending-Developers</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-请求说明"><span class="toc-text">4.2.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-返回响应"><span class="toc-text">4.2.2 返回响应</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-关于User-Repos-API"><span class="toc-text">5. 关于User-Repos-API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-User"><span class="toc-text">5.1 User</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-1-请求说明"><span class="toc-text">5.1.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-返回响应"><span class="toc-text">5.1.2 返回响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-Repos"><span class="toc-text">5.2 Repos</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-1-请求说明"><span class="toc-text">5.2.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-2-返回响应"><span class="toc-text">5.2.2 返回响应</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-关于搜索-API"><span class="toc-text">6. 关于搜索-API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-搜索"><span class="toc-text">6.1 搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-1-请求说明"><span class="toc-text">6.1.1 请求说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-2-返回响应"><span class="toc-text">6.1.2 返回响应</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-总结"><span class="toc-text">7. 总结</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+    访问量:
+    <strong id="busuanzi_value_site_pv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    &nbsp; | &nbsp;
+    访客数:
+    <strong id="busuanzi_value_site_uv">
+        <i class="fa fa-spinner fa-spin"></i>
+    </strong>
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2014
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>
